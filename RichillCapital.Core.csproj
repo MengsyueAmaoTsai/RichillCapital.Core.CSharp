@@ -1,12 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <Import Project="./Solution.Build.props"/>
+  <Import Project="./Solution.Build.props" />
+  
+   <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+      <_Parameter1>RichillCapital.Core.UnitTests</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
 
   <ItemGroup>
     <Compile Remove="coverage\**" />
+    <Compile Remove="dist\**" />
     <Compile Remove="Tests\**" />
     <EmbeddedResource Remove="coverage\**" />
+    <EmbeddedResource Remove="dist\**" />
     <EmbeddedResource Remove="Tests\**" />
     <None Remove="coverage\**" />
+    <None Remove="dist\**" />
     <None Remove="Tests\**" />
   </ItemGroup>
 
@@ -19,5 +28,5 @@
     <None Remove="Solution.ruleset" />
   </ItemGroup>
 
-  <Import Project="./Solution.Packages.props"/>
+  <Import Project="./Solution.Packages.props" />
 </Project>

@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F80AC307-01CE-40C1-BE9C-326802A93FA3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{01CB150D-8CFA-4AF7-B353-656652160880}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitignore = .gitignore
+		LICENSE = LICENSE
+		RAEDME.md = RAEDME.md
+		Solution.Build.props = Solution.Build.props
+		Solution.Build.Tests.props = Solution.Build.Tests.props
+		Solution.ruleset = Solution.ruleset
+		stylecop.json = stylecop.json
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RichillCapital.Core.UnitTests", "Tests\RichillCapital.Core.UnitTests\RichillCapital.Core.UnitTests.csproj", "{892559B2-60BC-47B4-A1CD-57CDFFA661B5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{892559B2-60BC-47B4-A1CD-57CDFFA661B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{892559B2-60BC-47B4-A1CD-57CDFFA661B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{892559B2-60BC-47B4-A1CD-57CDFFA661B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{892559B2-60BC-47B4-A1CD-57CDFFA661B5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{892559B2-60BC-47B4-A1CD-57CDFFA661B5} = {F80AC307-01CE-40C1-BE9C-326802A93FA3}
+	EndGlobalSection
+EndGlobal

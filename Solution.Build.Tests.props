@@ -1,0 +1,9 @@
+<Project>
+  <Import Project="./Solution.Build.props" />
+
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+</Project>

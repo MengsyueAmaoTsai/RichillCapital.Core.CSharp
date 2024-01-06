@@ -1,7 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <Import Project="./Solution.Build.props" />
   
-   <ItemGroup>
+  <PropertyGroup>
+    <PackageId>RichillCapital.Core</PackageId>
+    <Version>1.5.2</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
     <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
       <_Parameter1>RichillCapital.Core.UnitTests</_Parameter1>
     </AssemblyAttribute>

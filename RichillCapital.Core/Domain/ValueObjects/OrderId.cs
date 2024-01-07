@@ -13,7 +13,7 @@ public sealed class OrderId : ValueObject
 
     public string Value { get; private init; }
 
-    public static OrderId Create(string id)
+    public static OrderId From(string id)
     {
         return new OrderId(id);
     }

@@ -8,4 +8,4 @@ public sealed record CreateBotCommand(
     string BotId,
     string Name,
     string Description,
-    string TradingPlatform) : ICommand<Result<BotId>>;
+    string TradingPlatform) : ICommand<ErrorOr<BotId>>;

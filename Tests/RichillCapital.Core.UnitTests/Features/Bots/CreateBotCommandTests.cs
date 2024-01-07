@@ -36,7 +36,7 @@ public sealed class CreateBotCommandTests
             default);
 
         // Assert
-        result.IsSuccess.Should().BeFalse();
+        result.HasError.Should().BeTrue();
         result.Error.Type.Should().Be(ErrorType.Invalid);
     }
 
@@ -57,7 +57,7 @@ public sealed class CreateBotCommandTests
         await _botRepository.Received(1).AnyAsync(
             Arg.Any<Expression<Func<Bot, bool>>>(),
             Arg.Any<CancellationToken>());
-        result.IsSuccess.Should().BeFalse();
+        result.HasError.Should().BeTrue();
         result.Error.Type.Should().Be(ErrorType.Conflict);
     }
 
@@ -78,7 +78,7 @@ public sealed class CreateBotCommandTests
         await _botRepository.Received(2).AnyAsync(
             Arg.Any<Expression<Func<Bot, bool>>>(),
             Arg.Any<CancellationToken>());
-        result.IsSuccess.Should().BeFalse();
+        result.HasError.Should().BeTrue();
         result.Error.Type.Should().Be(ErrorType.Conflict);
     }
 
@@ -102,7 +102,7 @@ public sealed class CreateBotCommandTests
 
         _botRepository.Received(1).Add(Arg.Any<Bot>());
         await _unitOfWork.Received(1).SaveChangesAsync(Arg.Any<CancellationToken>());
-        result.IsSuccess.Should().BeTrue();
+        result.HasError.Should().BeFalse();
         result.Value.Should().BeOfType<BotId>();
     }
 }

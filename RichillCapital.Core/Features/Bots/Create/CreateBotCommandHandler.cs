@@ -7,7 +7,7 @@ using RichillCapital.Extensions.Primitives;
 
 namespace RichillCapital.Core.Features.Bots.Create;
 
-internal sealed class CreateBotCommandHandler : ICommandHandler<CreateBotCommand, Result<BotId>>
+internal sealed class CreateBotCommandHandler : ICommandHandler<CreateBotCommand, ErrorOr<BotId>>
 {
     private readonly IRepository<Bot> _botRepository;
     private readonly IUnitOfWork _unitOfWork;
@@ -18,7 +18,7 @@ internal sealed class CreateBotCommandHandler : ICommandHandler<CreateBotCommand
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<Result<BotId>> Handle(CreateBotCommand command, CancellationToken cancellationToken)
+    public async Task<ErrorOr<BotId>> Handle(CreateBotCommand command, CancellationToken cancellationToken)
     {
         var botId = new BotId(command.BotId);
         var name = new Name(command.Name);

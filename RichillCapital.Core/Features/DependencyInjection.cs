@@ -15,6 +15,8 @@ public static class DependencyInjection
         services.AddMediatR(configuration =>
         {
             configuration.RegisterServicesFromAssembly(assembly);
+            configuration.AddOpenBehavior(typeof(LoggingPipelineBehavior<,>));
+            configuration.AddOpenBehavior(typeof(ValidationPipelineBehavior<,>));
         });
 
         services.AddScoped<IDomainEventDispatcher, MediatRDomainEventDispatcher>();

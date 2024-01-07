@@ -43,6 +43,9 @@ public sealed class ListUsersQueryTests
         var result = await _handler.Handle(Query, default);
 
         // Assert
+        await _userRepository
+            .Received(1)
+            .ListAsync(Arg.Any<CancellationToken>());
         result.IsSuccess.Should().BeTrue();
         result.Value.Should().BeOfType<ReadOnlyCollection<UserDto>>();
         result.Value.Should().HaveCount(2);

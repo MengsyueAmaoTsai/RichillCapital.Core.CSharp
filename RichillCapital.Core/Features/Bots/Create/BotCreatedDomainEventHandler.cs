@@ -11,16 +11,13 @@ namespace RichillCapital.Core.Features.Bots.Create;
 internal sealed class BotCreatedDomainEventHandler :
     IDomainEventHandler<BotCreatedDomainEvent>
 {
-    private readonly ILogger<BotCreatedDomainEventHandler> _logger;
     private readonly IRepository<Account> _accountRepository;
     private readonly IUnitOfWork _unitOfWork;
 
     public BotCreatedDomainEventHandler(
-        ILogger<BotCreatedDomainEventHandler> logger,
         IRepository<Account> accountRepository,
         IUnitOfWork unitOfWork)
     {
-        _logger = logger;
         _accountRepository = accountRepository;
         _unitOfWork = unitOfWork;
     }
@@ -29,11 +26,6 @@ internal sealed class BotCreatedDomainEventHandler :
         BotCreatedDomainEvent domainEvent,
         CancellationToken cancellationToken)
     {
-        _logger.LogInformation(
-            "{event} - {id}",
-            domainEvent.GetType().Name,
-            domainEvent.BotId.Value);
-
         var accounts = new List<Account>()
         {
             Account.Create(

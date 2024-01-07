@@ -7,6 +7,8 @@ namespace RichillCapital.Core.Domain.Entities;
 
 public sealed class Account : Entity<AccountId>
 {
+    private readonly List<Balance> _balances = new();
+
     private Account(
         AccountId id,
         Name name,
@@ -21,7 +23,13 @@ public sealed class Account : Entity<AccountId>
 
     public Currency Currency { get; private set; }
 
-    public static Account Create(AccountId id, Name name, Currency currency, int initialBalance)
+    public IReadOnlyCollection<Balance> Balances => _balances.AsReadOnly();
+
+    public static Account Create(
+        AccountId id,
+        Name name,
+        Currency currency,
+        int initialBalance)
     {
         var account = new Account(id, name, currency);
 

@@ -6,24 +6,21 @@ using RichillCapital.Core.SharedKernel;
 
 namespace RichillCapital.Core.Features.Orders;
 
-internal sealed class OrderCreatedDomainEventHandler :
-    IDomainEventHandler<OrderCreatedDomainEvent>
+internal sealed class OrderAcceptedDomainEventHandler :
+    IDomainEventHandler<OrderAcceptedDomainEvent>
 {
-    private readonly ILogger<OrderCreatedDomainEventHandler> _logger;
+    private readonly ILogger<OrderAcceptedDomainEventHandler> _logger;
     private readonly IRepository<Order> _orderRepository;
-    private readonly IUnitOfWork _unitOfWork;
 
-    public OrderCreatedDomainEventHandler(
-        ILogger<OrderCreatedDomainEventHandler> logger,
-        IRepository<Order> orderRepository,
-        IUnitOfWork unitOfWork)
+    public OrderAcceptedDomainEventHandler(
+        ILogger<OrderAcceptedDomainEventHandler> logger,
+        IRepository<Order> orderRepository)
     {
         _logger = logger;
         _orderRepository = orderRepository;
-        _unitOfWork = unitOfWork;
     }
 
-    public async Task Handle(OrderCreatedDomainEvent domainEvent, CancellationToken cancellationToken)
+    public async Task Handle(OrderAcceptedDomainEvent domainEvent, CancellationToken cancellationToken)
     {
         _logger.LogInformation("On {event}", domainEvent.GetType().Name);
 
@@ -34,10 +31,5 @@ internal sealed class OrderCreatedDomainEventHandler :
         {
             throw new InvalidOperationException();
         }
-
-        orderMaybe.Value.AsAccepted();
-
-        _orderRepository.Update(orderMaybe.Value);
-        await _unitOfWork.SaveChangesAsync(cancellationToken);
     }
 }

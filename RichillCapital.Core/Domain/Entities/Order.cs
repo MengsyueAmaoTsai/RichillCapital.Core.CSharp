@@ -27,4 +27,9 @@ public sealed class Order : Entity<OrderId>
 
         return order;
     }
+
+    public void AsAccepted()
+    {
+        RegisterDomainEvent(new OrderAcceptedDomainEvent(Id));
+    }
 }

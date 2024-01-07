@@ -13,13 +13,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		RAEDME.md = RAEDME.md
 		Solution.Build.props = Solution.Build.props
 		Solution.Build.Tests.props = Solution.Build.Tests.props
+		Solution.Packages.props = Solution.Packages.props
 		Solution.ruleset = Solution.ruleset
 		stylecop.json = stylecop.json
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RichillCapital.Core.UnitTests", "Tests\RichillCapital.Core.UnitTests\RichillCapital.Core.UnitTests.csproj", "{892559B2-60BC-47B4-A1CD-57CDFFA661B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RichillCapital.Core.UnitTests", "Tests\RichillCapital.Core.UnitTests\RichillCapital.Core.UnitTests.csproj", "{892559B2-60BC-47B4-A1CD-57CDFFA661B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RichillCapital.Core", "RichillCapital.Core.csproj", "{D7BFAFA3-ABE6-437C-A2AD-C0FDFEE34E37}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RichillCapital.Core", "RichillCapital.Core.csproj", "{D7BFAFA3-ABE6-437C-A2AD-C0FDFEE34E37}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

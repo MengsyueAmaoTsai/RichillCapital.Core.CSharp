@@ -7,7 +7,7 @@ namespace RichillCapital.Core.Domain.Entities;
 
 public sealed class Account : Entity<AccountId>
 {
-    private readonly List<Balance> _balances = new();
+    private readonly List<Balance> _balances;
 
     private Account(
         AccountId id,
@@ -17,6 +17,9 @@ public sealed class Account : Entity<AccountId>
     {
         Name = name;
         Currency = currency;
+        _balances = Currency.Members
+            .Select(currency => Balance.Zero(id, currency))
+            .ToList();
     }
 
     public Name Name { get; private set; }

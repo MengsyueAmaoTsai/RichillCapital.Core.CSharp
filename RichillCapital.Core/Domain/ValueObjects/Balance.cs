@@ -24,6 +24,9 @@ public sealed class Balance : ValueObject
         return new Balance(accountId, amount, currency);
     }
 
+    public static Balance Zero(AccountId accountId, Currency currency) =>
+        new(accountId, decimal.Zero, currency);
+
     protected override IEnumerable<object> GetAtomicValues()
     {
         yield return Amount;

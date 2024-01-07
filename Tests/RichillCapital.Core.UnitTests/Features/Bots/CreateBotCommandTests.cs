@@ -28,6 +28,19 @@ public sealed class CreateBotCommandTests
     }
 
     [TestMethod]
+    public async Task When_PlatformIsInvalid_Should_ReturnFailure()
+    {
+        // Act
+        var result = await _handler.Handle(
+            Command with { TradingPlatform = "invalid" },
+            default);
+
+        // Assert
+        result.IsSuccess.Should().BeFalse();
+        result.Error.Type.Should().Be(ErrorType.Invalid);
+    }
+
+    [TestMethod]
     public async Task When_BotIdIsNotUnique_Should_ReturnFailure()
     {
         // Arrange
@@ -49,6 +62,27 @@ public sealed class CreateBotCommandTests
     }
 
     [TestMethod]
+    public async Task When_BotNameIsNotUnique_Should_ReturnFailure()
+    {
+        // Arrange
+        _botRepository
+            .AnyAsync(
+                Arg.Any<Expression<Func<Bot, bool>>>(),
+                Arg.Any<CancellationToken>())
+            .Returns(false, true);
+
+        // Act
+        var result = await _handler.Handle(Command, default);
+
+        // Assert
+        await _botRepository.Received(2).AnyAsync(
+            Arg.Any<Expression<Func<Bot, bool>>>(),
+            Arg.Any<CancellationToken>());
+        result.IsSuccess.Should().BeFalse();
+        result.Error.Type.Should().Be(ErrorType.Conflict);
+    }
+
+    [TestMethod]
     public async Task When_BotIdIsUnique_Should_ReturnSuccess()
     {
         // Arrange
@@ -62,7 +96,7 @@ public sealed class CreateBotCommandTests
         var result = await _handler.Handle(Command, default);
 
         // Assert
-        await _botRepository.Received(1).AnyAsync(
+        await _botRepository.Received(2).AnyAsync(
             Arg.Any<Expression<Func<Bot, bool>>>(),
             Arg.Any<CancellationToken>());
 

@@ -1,5 +1,6 @@
 using RichillCapital.Core.Domain.Entities;
 using RichillCapital.Core.Domain.Enumerations;
+using RichillCapital.Core.Domain.Errors;
 using RichillCapital.Core.Domain.ValueObjects;
 using RichillCapital.Core.SharedKernel;
 using RichillCapital.Extensions.Primitives;
@@ -29,11 +30,17 @@ internal sealed class CreateBotCommandHandler : ICommandHandler<CreateBotCommand
         }
 
         if (await _botRepository.AnyAsync(
-            bot => bot.Id == botId ||
-            bot.Name == name,
+            bot => bot.Id == botId,
             cancellationToken))
         {
-            return Error.Conflict("Duplicated bot id.");
+            return BotErrors.Duplicated(botId);
+        }
+
+        if (await _botRepository.AnyAsync(
+            bot => bot.Name == name,
+            cancellationToken))
+        {
+            return BotErrors.Duplicated(name);
         }
 
         var bot = Bot.Create(

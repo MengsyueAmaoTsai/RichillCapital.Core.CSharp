@@ -1,14 +1,14 @@
-using System.Data;
+using System.Collections.ObjectModel;
 
 using FluentAssertions;
 
 using NSubstitute;
 
 using RichillCapital.Core.Domain.Entities;
+using RichillCapital.Core.Domain.ValueObjects;
 using RichillCapital.Core.Features.Users;
 using RichillCapital.Core.Features.Users.List;
 using RichillCapital.Core.SharedKernel;
-using RichillCapital.Extensions.Primitives;
 
 namespace RichillCapital.Core.UnitTests.Features.Users;
 
@@ -25,17 +25,26 @@ public sealed class ListUsersQueryTests
         _handler = new(_userRepository);
     }
 
+    [TestMethod]
     public async Task When_QueryIsValid_Should_ReturnSuccess()
     {
+        // Arrange
+        var users = new List<User>()
+        {
+            User.Create(new UserId(string.Empty), new Email(string.Empty), new Name(string.Empty)),
+            User.Create(new UserId(string.Empty), new Email(string.Empty), new Name(string.Empty)),
+        };
+
         _userRepository
             .ListAsync(Arg.Any<CancellationToken>())
-            .Returns(Arg.Any<List<User>>());
+            .Returns(users);
 
         // Act
         var result = await _handler.Handle(Query, default);
 
         // Assert
         result.IsSuccess.Should().BeTrue();
-        result.Value.Should().BeOfType<IEnumerable<UserDto>>();
+        result.Value.Should().BeOfType<ReadOnlyCollection<UserDto>>();
+        result.Value.Should().HaveCount(2);
     }
 }

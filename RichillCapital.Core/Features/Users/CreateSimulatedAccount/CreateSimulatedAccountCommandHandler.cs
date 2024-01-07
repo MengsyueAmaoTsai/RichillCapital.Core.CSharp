@@ -25,7 +25,7 @@ internal sealed class CreateSimulatedAccountCommandHandler :
 
     public async Task<Result<AccountId>> Handle(CreateSimulatedAccountCommand command, CancellationToken cancellationToken)
     {
-        var userId = new UserId(command.UserId);
+        var userId = UserId.From(command.UserId);
         var name = new Name(command.AccountName);
         var currencyResult = Currency.FromName(command.Currency, true);
 

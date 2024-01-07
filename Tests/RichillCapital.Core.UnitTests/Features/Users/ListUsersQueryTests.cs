@@ -31,8 +31,8 @@ public sealed class ListUsersQueryTests
         // Arrange
         var users = new List<User>()
         {
-            User.Create(new UserId(string.Empty), new Email(string.Empty), new Name(string.Empty)),
-            User.Create(new UserId(string.Empty), new Email(string.Empty), new Name(string.Empty)),
+            User.Create(UserId.From(string.Empty), Email.From(string.Empty), new Name(string.Empty)),
+            User.Create(UserId.From(string.Empty), Email.From(string.Empty), new Name(string.Empty)),
         };
 
         _userRepository

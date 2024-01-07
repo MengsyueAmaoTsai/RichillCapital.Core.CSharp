@@ -1,3 +1,6 @@
+using System.Reflection.Metadata;
+using System.Runtime;
+
 using RichillCapital.Core.Domain.Enumerations;
 using RichillCapital.Extensions.Primitives;
 
@@ -21,6 +24,41 @@ public sealed class Money : ValueObject
     }
 
     public static Money Zero(Currency currency) => new(decimal.Zero, currency);
+
+    public Money Add(decimal amount)
+    {
+        return new Money(Amount + amount, Currency);
+    }
+
+    public Result<Money> Add(Money money)
+    {
+        if (Currency != money.Currency)
+        {
+            return Error.Conflict("Currency conflict.");
+        }
+
+        return new Money(Amount + money.Amount, Currency);
+    }
+
+    public Result<Money> Subtract(decimal amount)
+    {
+        if (Amount < amount)
+        {
+            return Error.Conflict("Cannot subtract");
+        }
+
+        return new Money(Amount - amount, Currency);
+    }
+
+    public Result<Money> Subtract(Money money)
+    {
+        if (Currency != money.Currency)
+        {
+            return Error.Conflict("Currency conflict.");
+        }
+
+        return Subtract(money.Amount);
+    }
 
     protected override IEnumerable<object> GetAtomicValues()
     {
